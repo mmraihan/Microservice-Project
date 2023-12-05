@@ -5,7 +5,7 @@ namespace Catalog.Api.Context
 {
     public class CatalogDbContextSeed
     {
-        static ProductManager _productManager= new ProductManager();
+        static ProductManager _productManager = new ProductManager();
 
         public static void Seed()
         {
