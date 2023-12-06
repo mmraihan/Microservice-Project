@@ -20,6 +20,7 @@ namespace Catalog.Api.Controllers
 
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<Product>), (int)HttpStatusCode.OK)] //Shows a template in swagger
+        [ResponseCache(Duration = 20)]
         public IActionResult GetProducts()
         {
             try
