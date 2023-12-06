@@ -22,8 +22,17 @@ namespace Catalog.Api.Controllers
         [ProducesResponseType(typeof(IEnumerable<Product>), (int)HttpStatusCode.OK)] //Shows a template in swagger
         public IActionResult GetProducts()
         {
-            var products = _productManager.GetAll();
-            return CustomResult("Data loaded",products);
+            try
+            {
+                var products = _productManager.GetAll();
+                return CustomResult("Data loaded", products);
+            }
+            catch (Exception ex)
+            {
+
+                return CustomResult(ex.Message, HttpStatusCode.BadRequest);
+            }
+           
         }
     }
 }
