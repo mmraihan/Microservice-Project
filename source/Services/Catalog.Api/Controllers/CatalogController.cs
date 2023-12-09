@@ -27,7 +27,7 @@ namespace Catalog.Api.Controllers
             try
             {
                 var products = _productManager.GetAll();
-                return CustomResult("Data loaded", products);
+                return CustomResult("Data loaded successfully", products);
             }
             catch (Exception ex)
             {
@@ -36,6 +36,44 @@ namespace Catalog.Api.Controllers
             }
            
         }
+
+        [HttpGet]
+        [ProducesResponseType(typeof(Product), (int)HttpStatusCode.OK)] //Shows a template in swagger
+        [ResponseCache(Duration = 20)]
+        public IActionResult GetById(string id)
+        {
+            try
+            {
+                var product = _productManager.GetById(id);
+                return CustomResult("Data loaded successfully", product);
+            }
+            catch (Exception ex)
+            {
+
+                return CustomResult(ex.Message, HttpStatusCode.BadRequest);
+            }
+
+        }
+
+
+        [HttpGet]
+        [ProducesResponseType(typeof(IEnumerable<Product>), (int)HttpStatusCode.OK)] //Shows a template in swagger
+        [ResponseCache(Duration = 20)]
+        public IActionResult GetByCategory(string category)
+        {
+            try
+            {
+                var products = _productManager.GetByCateory(category);
+                return CustomResult("Data loaded successfully", products);
+            }
+            catch (Exception ex)
+            {
+
+                return CustomResult(ex.Message, HttpStatusCode.BadRequest);
+            }
+
+        }
+
         [HttpPost]
         [ProducesResponseType(typeof(Product), (int)HttpStatusCode.Created)]
         public IActionResult CreateProduct([FromBody] Product product)
