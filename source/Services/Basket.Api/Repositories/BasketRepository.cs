@@ -22,8 +22,7 @@ namespace Basket.Api.Repositories
                 return null;
             }
             return JsonConvert.DeserializeObject<ShoppingCart>(basket);
-
-           
+          
         }
 
         public async Task<ShoppingCart> UpdateBasket(ShoppingCart basket)
@@ -31,6 +30,7 @@ namespace Basket.Api.Repositories
             await _redisCache.SetStringAsync(basket.UserName, JsonConvert.SerializeObject(basket));
             return await GetBasket(basket.UserName);
         }
+
         public async Task DeleteBasket(string userName)
         {
             await _redisCache.RemoveAsync(userName);
