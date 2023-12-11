@@ -22,13 +22,11 @@
                 foreach (var item in Items)
                 {
                     totalPrice += item.Price;
+                    totalPrice *= item.Quantity;
                 }
                 return totalPrice;
             }
         }
-            
-                              
-        
 
     }
 }
