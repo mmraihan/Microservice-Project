@@ -33,10 +33,19 @@ namespace Discount.Api.Repository
         public async Task<bool> CreateDiscount(Coupon coupon)
         {
             var connection = new NpgsqlConnection(_configuration.GetConnectionString("DiscountDb"));
-            var affected = await connection.ExecuteAsync
-                ("INSERT INTO Coupon(ProductId,ProductName,Description,Amount) VALUES(@ProductId,@ProductName,@Description,@Amount)",
-                new { ProductId = coupon.ProductId, ProductName = coupon.ProductName, Description = coupon.Description, Amount = coupon.Amount });
-            if (affected > 0)
+
+            var affectedRows = await connection.ExecuteAsync(
+               @"INSERT INTO public.""Coupon""(""ProductId"", ""ProductName"", ""Description"", ""Amount"")
+                  VALUES (@ProductId, @ProductName, @Description, @Amount)",
+               new
+               {
+                   coupon.ProductId,
+                   coupon.ProductName,
+                   coupon.Description,
+                   coupon.Amount
+               });
+
+            if (affectedRows > 0)
             {
                 return true;
             }
@@ -47,8 +56,22 @@ namespace Discount.Api.Repository
         public async Task<bool> UpdateDiscount(Coupon coupon)
         {
             var connection = new NpgsqlConnection(_configuration.GetConnectionString("DiscountDb"));
-            var affected = await connection.ExecuteAsync("UPDATE Coupon SET ProductId=@ProductId,ProductName=@ProductName,Description=@Description,Amount=@Amount", new { ProductId = coupon.ProductId, ProductName = coupon.ProductName, Description = coupon.Description, Amount = coupon.Amount });
-            if (affected > 0)
+
+            var affectedRows = await connection.ExecuteAsync(
+                 @"UPDATE public.""Coupon"" 
+                  SET ""ProductName"" = @ProductName, 
+                      ""Description"" = @Description, 
+                      ""Amount"" = @Amount
+                  WHERE ""id"" = @id",
+                 new
+                 {
+                     coupon.ProductId,
+                     coupon.ProductName,
+                     coupon.Description,
+                     coupon.Amount
+                 });
+
+            if (affectedRows > 0)
             {
                 return true;
             }
