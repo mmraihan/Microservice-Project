@@ -21,7 +21,7 @@ namespace Basket.Api.Repositories
             {
                 return null;
             }
-            return JsonConvert.DeserializeObject<ShoppingCart>(basket);
+            return JsonConvert.DeserializeObject<ShoppingCart>(basket); //string to object
           
         }
 
