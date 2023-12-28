@@ -1,4 +1,4 @@
-using Basket.Api.Context;
+using Basket.Api.Data;
 using Basket.Api.Repositories;
 using Confluent.Kafka;
 using Microsoft.EntityFrameworkCore;
@@ -12,12 +12,14 @@ builder.Services.AddStackExchangeRedisCache(options =>
     options.Configuration = builder.Configuration.GetConnectionString("BasketDb");
 });
 
-builder.Services.AddDbContext<BasketDbContext>(opt =>
+builder.Services.AddDbContext<TestDbContext>(opt =>
 {
     opt.UseSqlServer(builder.Configuration.GetConnectionString("BasketDbSQLServer"));
 });
 
 builder.Services.AddScoped<IBasketRepository,BasketRepository>();
+
+builder.Services.AddScoped<IStyleRepository, StyleRepository>();
 
 
 
