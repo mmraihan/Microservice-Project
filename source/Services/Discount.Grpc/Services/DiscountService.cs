@@ -1,4 +1,5 @@
-﻿using Discount.Grpc.Protos;
+﻿using AutoMapper;
+using Discount.Grpc.Protos;
 using Discount.Grpc.Repository;
 using Grpc.Core;
 
@@ -8,10 +9,12 @@ namespace Discount.Grpc.Services
     {
         ICouponRepository _couponRepository;
         ILogger<DiscountService> _logger;
-        public DiscountService(ICouponRepository couponRepository, ILogger<DiscountService> logger)
+        IMapper _mapper;
+        public DiscountService(ICouponRepository couponRepository, ILogger<DiscountService> logger, IMapper mapper)
         {
             _couponRepository = couponRepository;
             _logger = logger;
+            _mapper = mapper;
         }
 
         public override async Task<CouponRequest> GetDiscount(GetDiscountRequest request, ServerCallContext context)
@@ -24,10 +27,12 @@ namespace Discount.Grpc.Services
 
             _logger.LogInformation($"Getting discount for ProductName: {coupon.ProductName}, Amount: {coupon.Amount}");
 
-            return new CouponRequest 
-            { 
-                ProductId = coupon.ProductId, ProductName = coupon.ProductName, Description =coupon.Description, Amount = coupon.Amount,
-            };
+            //return new CouponRequest 
+            //{ 
+            //    ProductId = coupon.ProductId, ProductName = coupon.ProductName, Description =coupon.Description, Amount = coupon.Amount,
+            //};
+
+            return _mapper.Map<CouponRequest>(coupon);
 
         }
     }

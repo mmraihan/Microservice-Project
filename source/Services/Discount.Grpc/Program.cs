@@ -9,6 +9,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddScoped<ICouponRepository, CouponRepository>();
+
+builder.Services.AddAutoMapper(typeof(Program));
+
 builder.Services.AddGrpc();
 
 var app = builder.Build();
