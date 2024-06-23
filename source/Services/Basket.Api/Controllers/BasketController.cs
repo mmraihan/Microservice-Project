@@ -38,8 +38,17 @@ namespace Basket.Api.Controllers
         [ProducesResponseType(typeof(ShoppingCart), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> UpdateBasket([FromBody] ShoppingCart basket)
         {
+
+            #region Todo
+
+            //Todo: Commmunicate discount.grpc
+            //calculate latest price
+
+            #endregion
+
             try
             {
+               
                 var updatedBasket = await _basketRepository.UpdateBasket(basket);
                 return CustomResult("Data updated successfully", updatedBasket);
             }
