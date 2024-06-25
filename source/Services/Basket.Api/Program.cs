@@ -1,6 +1,8 @@
 using Basket.Api.Data;
+using Basket.Api.GrpcServices;
 using Basket.Api.Repositories;
 using Confluent.Kafka;
+using Discount.Grpc.Protos;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,6 +19,16 @@ builder.Services.AddDbContext<TestDbContext>(opt =>
     opt.UseSqlServer(builder.Configuration.GetConnectionString("BasketDbSQLServer"));
 });
 
+#region gRPC Service
+
+builder.Services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>(opt =>
+    opt.Address = new Uri(builder.Configuration.GetValue<string>("GrpcSettings: DiscountGrpcUrl")));
+
+builder.Services.AddScoped<DiscountGrpcService>();
+
+#endregion
+
+
 builder.Services.AddScoped<IBasketRepository,BasketRepository>();
 
 builder.Services.AddScoped<IStyleRepository, StyleRepository>();
@@ -24,7 +36,6 @@ builder.Services.AddScoped<IStyleRepository, StyleRepository>();
 
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
