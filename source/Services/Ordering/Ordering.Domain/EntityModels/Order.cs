@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Ordering.Domain.Models
+namespace Ordering.Domain.EntityModels
 {
     public class Order : EntityBase
     {
