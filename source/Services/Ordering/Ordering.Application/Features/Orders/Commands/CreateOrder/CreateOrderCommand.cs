@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Ordering.Application.Features.Orders.Commands.CreateOrder
 {
-    public class CreateOrderCommand : IRequest<bool>
+    public class CreateOrderCommand : IRequest<bool> // In Corporate Business logic with validate
     {
         public string UserName { get; set; }
         public decimal TotalPrice { get; set; }
