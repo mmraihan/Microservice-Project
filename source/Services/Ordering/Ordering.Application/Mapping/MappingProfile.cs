@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Ordering.Application.Features.Orders.Commands.CreateOrder;
+using Ordering.Application.Features.Orders.Commands.UpdateFolder;
 using Ordering.Application.Features.Orders.Queries.GetOrdersByUserName;
 using Ordering.Domain.EntityModels;
 using System;
@@ -16,6 +17,7 @@ namespace Ordering.Application.Mapping
         {
             CreateMap<Order,OrderVm>().ReverseMap();
             CreateMap<Order,CreateOrderCommand>().ReverseMap();
+            CreateMap<Order,UpdateOrderCommand>().ReverseMap();
         }
     }
 }
