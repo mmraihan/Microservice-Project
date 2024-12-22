@@ -16,4 +16,5 @@ namespace Ordering.Infrastructure.Mail
             }
             return false;
         }
+    }
 }

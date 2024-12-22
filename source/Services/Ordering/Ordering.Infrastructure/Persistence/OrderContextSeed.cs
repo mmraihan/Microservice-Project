@@ -22,17 +22,17 @@ namespace Ordering.Infrastructure.Persistence
                   EmailAddress = "mmraihan99@gmail.com",
                   Address = "Chattogram",
                   TotalPrice = 100,
-                  City = "Chattogram"
-                  //CVV = "Test",
-                  //CardName = "Test",
-                  //CardNumber = "Test",
-                  //Expiraton = "Test",
-                  //PaymentMethod = 1,
-                  //CreatedBy = "Test",
-                  //CreatedDate = DateTime.Now,
-                  //PhoneNumber = "0160000000",
-                  //State = "Test",
-                  //ZipCode = "Test"
+                  City = "Chattogram",
+                  CVV = "Test",
+                  CardName = "Test",
+                  CardNumber = "Test",
+                  Expiraton = "Test",
+                  PaymentMethod = 1,
+                  CreatedBy = "Test",
+                  CreatedDate = DateTime.Now,
+                  PhoneNumber = "0160000000",
+                  State = "Test",
+                  ZipCode = "Test"
               }
              );
 
